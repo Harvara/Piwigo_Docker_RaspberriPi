@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  lamp-container:
+    image: arm32v7/ubuntu
+    container_name: lamp-container
+    command: tail -f /dev/null
+    ports:
+      - "80:80"
+    volumes:
+      - ./html:/var/www/html
+    build:
+      context: ./dockerfile
+      dockerfile: Dockerfile
+  mysql-server:
+    image: linuxserver/mariadb:alpine
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOTPASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+        - "3306:3306"
+volumes:
+  html:  # Define a named volume for the web server content
