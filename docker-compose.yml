@@ -14,6 +14,8 @@ services:
       dockerfile: Dockerfile
   mysql-server:
     image: linuxserver/mariadb:alpine
+    volumes:
+      - ./db-fixtures/:/docker-entrypoint-initdb.d/
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOTPASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
