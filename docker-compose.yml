@@ -9,8 +9,9 @@ services:
       - "80:80"
     volumes:
       - ./html:/var/www/html
+      - ./content:/usr/src/content
     build:
-      context: ./dockerfile
+      context: .
       dockerfile: Dockerfile
   mysql-server:
     image: linuxserver/mariadb:alpine
